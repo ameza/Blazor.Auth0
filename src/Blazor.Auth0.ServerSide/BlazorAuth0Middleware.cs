@@ -14,7 +14,10 @@ namespace Blazor.Auth0
     {
         public static IApplicationBuilder UseBlazorAuth0(this IApplicationBuilder app)
         {
-            app.UseCookiePolicy();
+            app.UseCookiePolicy(new CookiePolicyOptions
+            {
+                Secure = CookieSecurePolicy.Always,
+            });
             app.UseAuthentication();
             app.UseAuthorization();
             return app.UseMiddleware<BlazorAuth0Middleware>();
